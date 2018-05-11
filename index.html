@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>导航页</title>
+    <link rel="shortcut icon" href="img/navigation_64px_1201169_easyicon.net.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header></header>
+    <main>
+        <div class="keyboard"></div>
+    </main>
+    <footer></footer>
+    <script>
+        var keys = {
+            0: ['q','w','e','r','t','y','u','i','o','p'],
+            1: ['a','s','d','f','g','h','j','k','l'],
+            2: ['z','x','c','v','b','n','m'],
+            length: 3
+        }
+        var hash = {
+            q: 'www.qq.com',
+            w: 'www.weibo.com',
+            e: 'www.ele.me',
+            r: 'www.renren.com',
+            t: 'www.tianya.com',
+            y: 'www.youtube.com',
+            u: 'www.uc.com',
+            i: 'www.iqiyi.com',
+            o: 'www.opera.com',
+            p: undefined,
+            a: 'www.acfun.tv',
+            s: 'www.sohu.com',
+            z: 'www.zhihu.com',
+            m: 'www.mcdonalds.com.cn'
+        }
+        var hashInLocalStorage = JSON.parse(localStorage.getItem('newHash') || 'null');
+        if(hashInLocalStorage){
+            hash = hashInLocalStorage;
+        }
+        var index = 0;
+        var keyboard = document.querySelector('.keyboard');
+        while(index < keys.length){
+            var div = document.createElement('div');
+            keyboard.appendChild(div);
+            var row = keys[index];
+            var index2 = 0;
+            while(index2 < row.length){
+                var kbd = document.createElement('kbd');
+                kbd.textContent = row[index2];
+                kbd.id = row[index2];
+                kbd.addEventListener('mouseover', function () {
+                    this.setAttribute('title', hash[this.id]);
+                }, false)
+                div.appendChild(kbd);
+                var button = document.createElement('button');
+                button.textContent = 'E';
+                button.setAttribute('title','编辑');
+                kbd.appendChild(button);
+                button.id = row[index2];
+                button.addEventListener('click',function(){
+                    var k = this.id;
+                    var newWebsite = prompt('请输入你想编辑的网址');
+                    hash[k] = newWebsite;
+                    localStorage.setItem('newHash', JSON.stringify(hash));
+                },false)
+                index2++;
+            }
+            index++;
+        }
+        document.addEventListener('keypress',function(event){
+            var key = event['key'];
+            var website = hash[key];
+            // location.href = 'http://'+website;
+            window.open('http://' + website, '_blank');
+        },false)
+    </script>
+</body>
+</html>
