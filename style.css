@@ -5,19 +5,39 @@
 a{
     text-decoration: none;
 }
-main {
+main{
     text-align: center;
 }
 kbd{
+    width: 47px;
+    height: 69px;
+    border-radius: 8px;
+    padding: 0 12px;
+    line-height: 69px;
+    float: left;
+    position: relative;
+    color: #fff;
+    background-color: #000;
     border: 1px solid #000;
-    border-radius: 5px;
-    margin-right: 1em;
-    display: inline-block;
-    padding: 1em 1.5em;
-    font-size: 16px;
+    margin: 0 12px 12px 0;
+    font-family: keyboard,"Arial Rounded",Helvetica,Arial,sans-serif;
+    font-size: 24px;
     text-transform: uppercase;
     text-align: center;
-    position: relative;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+.clearfix::after{
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: '';
+    clear: both;
+    height: 0;
+}
+kbd:active{
+    top: 2px;
+    box-shadow: 2px 0px 2px rgba(0, 0, 0, 0.5);
 }
 kbd > button{
     position: absolute;
@@ -33,8 +53,8 @@ kbd:hover button{
     display: inline-block;
 }
 .keyboard > div:nth-child(2){
-    margin-left: 1em;
+    margin-left: 18px;
 }
 .keyboard>div:nth-child(3) {
-    margin-left: 2em;
+    margin-left: 40px;
 }
